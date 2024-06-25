@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulačka</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        .container {
+            display: inline-block;
+            text-align: left;
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        input, select, button {
+            margin: 5px;
+            padding: 10px;
+            font-size: 16px;
+        }
+        #result {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Kalkulačka</h1>
+    <div class="container">
+        <input type="number" id="num1" placeholder="Prvé číslo" required>
+        <select id="operation">
+            <option value="add">Sčítanie</option>
+            <option value="subtract">Odčítanie</option>
+            <option value="multiply">Násobenie</option>
+            <option value="divide">Delenie</option>
+        </select>
+        <input type="number" id="num2" placeholder="Druhé číslo" required>
+        <button onclick="calculate()">Vypočítať</button>
+        <div id="result">Výsledok: </div>
+    </div>
+
+    <script>
+        function calculate() {
+            const num1 = parseFloat(document.getElementById('num1').value);
+            const num2 = parseFloat(document.getElementById('num2').value);
+            const operation = document.getElementById('operation').value;
+            let result;
+
+            if (isNaN(num1) || isNaN(num2)) {
+                result = "Prosím, zadajte platné čísla.";
+            } else {
+                switch (operation) {
+                    case 'add':
+                        result = num1 + num2;
+                        break;
+                    case 'subtract':
+                        result = num1 - num2;
+                        break;
+                    case 'multiply':
+                        result = num1 * num2;
+                        break;
+                    case 'divide':
+                        if (num2 !== 0) {
+                            result = num1 / num2;
+                        } else {
+                            result = "Chyba (delenie nulou)";
+                        }
+                        break;
+                    default:
+                        result = "Neznáma operácia";
+                }
+            }
+
+            document.getElementById('result').textContent = `Výsledok: ${result}`;
+        }
+    </script>
+</body>
+</html>
